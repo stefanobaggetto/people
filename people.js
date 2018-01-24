@@ -30,4 +30,17 @@ people.route('/people')
     res.json(people)
   });
 
+people.route('/people/:id')
+
+//get one
+  .get((req, res) => {
+    var id = req.params.id
+    const i = arrayPeople.findIndex(item => {return item.id === id})
+    if (i==-1) res.sendStatus(404)
+    else{
+      res.status(200)
+      res.json(arrayPeople[i])
+    }
+  });
+
 module.exports = people
