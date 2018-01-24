@@ -42,6 +42,17 @@ people.route('/people/:id')
         res.json(arrayPeople[i])
     }
   })
+.delete((req, res) => {
+    var id = req.params.id
+    const i = arrayPeople.findIndex(item => {return item.id === id})
+    if (i==-1) res.sendStatus(404) //elemento non trovato
+    else {
+        arrayPeople.splice(i,1) //elimina l'elemento
+        res.status(200)
+        res.json({message: 'deleted'})
+        /*res.json(cancellato})*/
+    }
+  })
 //get one
   .get((req, res) => {
     var id = req.params.id
