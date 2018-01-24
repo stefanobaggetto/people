@@ -31,7 +31,17 @@ people.route('/people')
   });
 
 people.route('/people/:id')
-
+.put((req, res) => {
+    var id = req.params.id
+    const i = arrayPeople.findIndex(item => {return item.id === id})
+    if (i==-1) res.sendStatus(404) //elemento non trovato
+    else {
+        if (req.body.nome) arrayPeople[i].nome = req.body.nome
+        if (req.body.cognome) arrayPeople[i].cognome = req.body.cognome
+        res.status(200)
+        res.json(arrayPeople[i])
+    }
+  })
 //get one
   .get((req, res) => {
     var id = req.params.id
